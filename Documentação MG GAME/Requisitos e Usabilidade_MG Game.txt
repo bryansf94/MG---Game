@@ -1,0 +1,440 @@
+﻿LEVANTAMENTO DE REQUISITOS 
+MG Game
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Equipe MG Game - 2024.
+
+
+Índice:
+
+
+1. Introdução;
+2. Requisitos Funcionais;
+3. Requisitos Não Funcionais;
+4. Usabilidade;
+5. Considerações finais.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Introdução:
+        
+Este documento tem como objetivo registrar de forma clara e sucinta, o levantamento e a elaboração de requisitos e  funcionalidades que vão integrar o sistema de perguntas e respostas denominado MG Game. O avanço do sistema será feito utilizando Scrum, uma metodologia ágil de gestão de projetos. Cada membro da equipe possui tarefas específicas voltadas e organizadas rigorosamente para o desenvolvimento do sistema. 
+
+
+O sistema não surge por meio de demanda de cliente, mas sim, por iniciativa de estudo e conhecimento por parte dos integrantes da equipe. O mesmo apresenta em sua abordagem de processos, execuções precisas, com entrevistas, levantamentos e estudos de requisitos por parte dos membros da equipe.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Requisitos funcionais
+
+
+A coleta de requisitos funcionais foi realizada através de entrevista, segue abaixo as perguntas e as informações coletadas apresentadas no quadro abaixo.
+
+
+User Hitory:
+
+
+ID
+	Descrição
+	Importância 
+	Nota
+	R00
+	Como usuário (adm do jogo) eu gostaria de criar um game de perguntas e respostas podendo conter entre 10 a 20 questões.
+	Essencial 
+	
+
+	R01
+	Como usuário (adm do jogo) gostaria de que para meu game de pergunta e resposta fosse possível escolher entre 5 opções para responder às questões.
+	Essencial
+	
+
+	R02
+	Como usuário (adm do jogo) gostaria que o meu sistema comportasse até 4 jogadores.
+	Essencial
+	
+
+	
+
+R03
+	Como usuário (adm do jogo) gostaria que o sistema ordenasse a vez de qual jogador seria para responder às questões.
+	Essencial
+	
+
+	R04
+	Como usuário (adm do jogo) gostaria de poder selecionar a pontuação de cada questão.
+	Essencial
+	
+
+	R05
+	Como usuário gostaria de que o meu sistema distribuísse os pontos para os jogadores na medida que  eles acertaram  ou erraram as questões.
+	Essencial
+	
+
+	R06
+	Como usuário (adm do jogo) eu gostaria de armazenar os meus games criados e os rejogar sempre que desejar.
+	Essencial
+	
+
+	
+
+
+
+
+Requisitos não funcionais
+
+
+Os requisitos não funcionais e tecnologias escolhidas para desenvolvimento do site foram:
+
+
+
+
+ID
+	Descrição
+	Importância 
+	Nota
+	RNF 00
+	O game deve ser um site.
+	Essencial
+	
+
+	RNF 01
+	O site  deve funcionar em um arquivo HTML 5.
+	Essencial 
+	
+
+	RNF 02
+	O site deve ser lido em qualquer dispositivo que suporte HTML5.
+	Essencial
+	
+
+	RNF 04
+	O site deve ser construído com Java Js para suas funcionalidades  e CSS para seu design.
+	Essencial
+	
+
+	
+
+RNF 05
+	O site deve gravar suas informações em um banco de dados.
+	Essencial
+	
+
+	RNF 06
+	O banco deve ser um SQLITE.
+	Desejável
+	
+
+	RNF 07
+	O banco deve ser um Mysql ou SQL SERVER etc.
+	Desejável
+	Dificilmente.
+	RNF 08
+	O site deve ser hospedado em um server.
+	Desejável
+	Caso o RNF 07 for aplicado esse item se torna obrigatório.
+	
+
+
+
+
+
+
+
+Usabilidade
+
+
+Em termos de design, experiência de usuário e interface. Foi idealizado os seguintes pontos citados abaixo:
+
+
+
+ID
+	Descrição
+	Importância 
+	Nota
+	RDU 00
+	O game deve ser responsivo pensando em diferentes dispositivos (desktop, tablets e celulares).
+	Essencial
+	Por exemplo deve se comportar bem tanto na horizontal como na vertical.
+	RDU 01
+	O game deve ser disposto primordialmente em tela na vertical. 
+	Essencial 
+	
+
+	RDU 02
+	O usuário adm pode nomear através de nicknames os participantes.
+	Essencial
+	
+
+	RDU 03
+	Cada usuário pode ter uma foto para representar o seu nick.
+	Desejável
+	As fotos serão incluídas direto no software sem a possibilidade de incluir novas por parte do usuário.
+	RDU 04
+
+
+	O usuário poderá escolher quais as fotos dos participantes.
+	Desejável
+	
+
+	RDU 05
+	O sistema deve ser em tema escuro utilizando-se de cores e efeitos neon.
+	Desejável
+	Ver como referência Alura
+	
+
+
+
+
+
+
+
+
+
+
+
+Fluxograma
+A Definir
+Mapa mental:
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+Considerações finais
+
+
+Este documento apresenta informações introdutórias e fundamentais para a definição do sistema MG Game. Onde o mesmo servirá de base para o aprimoramento de escopo e implementação de demais funcionalidades.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fonte - Times New Roman - 13;
+Espaçamento - 1.5;
+Margem - 3 superior/esquerda, 2 inferior/direita.
