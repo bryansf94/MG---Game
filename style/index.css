@@ -16,7 +16,7 @@
 body{
     font-family: "Inter", sans-serif;
     background: var(--cor3);
-    color: var(--cor2)
+    color: var(--cor2);
 }
 
 .container{
