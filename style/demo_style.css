@@ -48,9 +48,13 @@ form{
     
 }
 
-
 #btn_salvar_player{
+    background-color: var(--cor1);
+    color: white;
+    font-size: 11pt;
+    font-weight: bold;
+    border: none;
     cursor: pointer;
     padding: 5px;
-     
+
 }
