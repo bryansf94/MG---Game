@@ -31,7 +31,7 @@ $questionText.textContent = questions[currentQuestionIndex].question
     newAsnwer.addEventListener("click", selectAnswer)
 })
 }
-function selectAnswer()
+function selectAnswer(event)
 
 
 
