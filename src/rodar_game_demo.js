@@ -18,28 +18,48 @@ function displayNextQuestions(){
 while($answerConatiner.firstChild) {
     $answerConatiner.removeChild($answerConatiner.firstChil)
 }
+// Define o texto da pergunta atual
 $questionText.textContent = questions[currentQuestionIndex].question
-  questions[currentQuestionIndex].answers.forEach(answer => {
+
+// Itera sobre cada resposta disponível para a pergunta atual
+questions[currentQuestionIndex].answers.forEach(answer => {
+    // Cria um novo botão para a resposta
     const newAsnwer = document.createElement("button")
+    
+    // Adiciona classes ao botão, estilizando-o como um botão de resposta
     newAsnwer.classList.add("button", "answer")
+    
+    // Define o texto do botão como o texto da resposta
     newAsnwer.textContent = answer.text
+    
+    // Se a resposta for correta, adiciona um atributo de dados 'correct' ao botão
     if (answer.correct) {
         newAsnwer.dataset.correct = answer.correct
     }
+    
+    // Adiciona o botão de resposta ao contêiner de respostas na interface
     $answerConatiner.appendChild(newAsnwer)
 
+    // Adiciona um evento de clique ao botão de resposta para que, ao ser clicado,
+    // a função 'selectAnswer' seja executada
     newAsnwer.addEventListener("click", selectAnswer)
 })
-}
 /* função que captura o evento da resposta selecionada pelo usuário e então confere se ela possui o atributo "correct" */
 
 function selectAnswer(event) {
 const ansClicked = event.target
 
 if(answerClicked.dataset.correct) {
-
+    document.body.classList.add("correct")
+    // essas classes são para manipular um atributo no css e indicar se a resposta está correta ou não, talvez podemos reutilizados //
+} else {
+    document.body.classList.add("incorrect")
 }
+document.querySelectorAll(".answer").forEach(button => {
+    if (button.dataset.correct){
 
+    }
+})
 }
 
 
