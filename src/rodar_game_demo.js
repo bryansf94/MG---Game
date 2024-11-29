@@ -31,7 +31,16 @@ $questionText.textContent = questions[currentQuestionIndex].question
     newAsnwer.addEventListener("click", selectAnswer)
 })
 }
-function selectAnswer(event)
+/* função que captura o evento da resposta selecionada pelo usuário e então confere se ela possui o atributo "correct" */
+
+function selectAnswer(event) {
+const ansClicked = event.target
+
+if(answerClicked.dataset.correct) {
+
+}
+
+}
 
 
 
