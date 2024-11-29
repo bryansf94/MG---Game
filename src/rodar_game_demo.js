@@ -7,7 +7,7 @@ const $questionsConnatianer = document.querySelector(".place.holder")
 $BotaoComeçarGame.addEvenListener("click", startGame)
 /* iniciando a função de começar game */
 
-let currentQuestionsIndexx = 0
+let currentQuestionsIndexx = 0;
 
 function startGame() {
 /* Place Holder, ainda trabaalhando nisso */
