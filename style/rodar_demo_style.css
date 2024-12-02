@@ -81,9 +81,9 @@ button:not(:disabled):hover{
     filter: brightness(0.8);
 }
 
-.hide{
+.hide {
     display: none;
-}
+  }
 
 .correct{
     background-color: rgb(35, 220, 60);

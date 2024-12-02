@@ -15,6 +15,8 @@ let totalCorrect = 0;
 
 // Função para iniciar o jogo
 function startGame() {
+    $botaoComecarGame.classList.add("hide")
+    $questionsContainer.classList.remove("hide")
     displayNextQuestions();
 }
 
@@ -43,7 +45,6 @@ function displayNextQuestions() {
         newAnswer.addEventListener("click", selectAnswer);
     });
 
-    $nextQuestion.classList.add("hide");
 }
 
 // Função para resetar o estado da interface
@@ -51,6 +52,8 @@ function resetState() {
     while ($answersContainer.firstChild) {
         $answersContainer.removeChild($answersContainer.firstChild);
     }
+  document.body.removeAttribute("class")
+  $nextQuestion.classList.add("hide")
 }
 
 // Função para selecionar uma resposta
@@ -106,84 +109,64 @@ function finishGame() {
 // Banco de perguntas e respostas
 const questions = [
     {
-        question: "teste de pergunta",
-        answers: [
-            { text: "resposta 01", correct: false },
-            { text: "resposta 02", correct: false },
-            { text: "resposta 03", correct: false },
-            { text: "resposta 04", correct: true },
-        ],
+      question: "Dentro de qual elemento HTML colocamos o JavaScript?",
+      answers: [
+        { text: "<javascript>", correct: false },
+        { text: "<js>", correct: false },
+        { text: "<script>", correct: true },
+        { text: "<scripting>", correct: false }
+      ]
     },
     {
-        question: "teste de pergunta 002",
-        answers: [
-            { text: "resposta 01", correct: false },
-            { text: "resposta 02", correct: true },
-            { text: "resposta 03", correct: false },
-            { text: "resposta 04", correct: false },
-        ],
+      question: "Onde é o lugar correto para inserir JavaScript?",
+      answers: [
+        { text: "Tanto no <head> quanto no <body> está correto", correct: true },
+        { text: "No <body>", correct: false },
+        { text: "No <head>", correct: false },
+        { text: "Em outro lugar", correct: false }
+      ]
     },
     {
-        question: "teste de pergunta 003",
-        answers: [
-            { text: "resposta 01", correct: true },
-            { text: "resposta 02", correct: false },
-            { text: "resposta 03", correct: false },
-            { text: "resposta 04", correct: false },
-        ],
+      question: 'Qual é a sintaxe correta para se referir a um script externo chamado "xxx.js"',
+      answers: [
+        { text: '<script src="xxx.js">', correct: true },
+        { text: '<script href="xxx.js">', correct: false },
+        { text: '<script name="xxx.js">', correct: false },
+        { text: "Nenhuma das alternativas", correct: false }
+      ]
     },
     {
-        question: "teste de pergunta 004",
-        answers: [
-            { text: "resposta 01", correct: false },
-            { text: "resposta 02", correct: true },
-            { text: "resposta 03", correct: false },
-            { text: "resposta 04", correct: false },
-        ],
+      question: 'O arquivo JavaScript externo deve conter a tag <script>',
+      answers: [
+        { text: "Verdadeiro", correct: false },
+        { text: "Falso", correct: true }
+      ]
     },
     {
-        question: "teste de pergunta 005",
-        answers: [
-            { text: "resposta 01", correct: false },
-            { text: "resposta 02", correct: true },
-            { text: "resposta 03", correct: false },
-            { text: "resposta 04", correct: false },
-        ],
+      question: 'Como escrever "Hello World" numa caixa de alerta?',
+      answers: [
+        { text: 'msg("Hello World");', correct: false },
+        { text: 'alert("Hello World");', correct: true },
+        { text: 'msgBox("Hello World");', correct: false },
+        { text: 'alertBox("Hello World");', correct: false }
+      ]
     },
     {
-        question: "teste de pergunta 006",
-        answers: [
-            { text: "resposta 01", correct: false },
-            { text: "resposta 02", correct: false },
-            { text: "resposta 03", correct: false },
-            { text: "resposta 04", correct: true },
-        ],
+      question: 'Como podemos criar uma função no JavaScript?',
+      answers: [
+        { text: 'function:myFunction()', correct: false },
+        { text: 'function myFunction()', correct: true },
+        { text: 'function = myFunction()', correct: false },
+        { text: 'Nenhum desses códigos criaria uma função', correct: false }
+      ]
     },
     {
-        question: "teste de pergunta 007",
-        answers: [
-            { text: "resposta 01", correct: false },
-            { text: "resposta 02", correct: false },
-            { text: "resposta 03", correct: true },
-            { text: "resposta 04", correct: false },
-        ],
+      question: 'Como podemos chamar uma função chamada "minhaFuncao"?',
+      answers: [
+        { text: 'call minhaFuncao()', correct: false },
+        { text: 'call function minhaFuncao()', correct: false },
+        { text: 'Nenhum desses códigos chamaria essa função', correct: false },
+        { text: 'minhaFuncao()', correct: true },
+      ]
     },
-    {
-        question: "teste de pergunta 008",
-        answers: [
-            { text: "resposta 01", correct: false },
-            { text: "resposta 02", correct: true },
-            { text: "resposta 03", correct: false },
-            { text: "resposta 04", correct: false },
-        ],
-    },
-    {
-        question: "teste de pergunta 009",
-        answers: [
-            { text: "resposta 01", correct: false },
-            { text: "resposta 02", correct: false },
-            { text: "resposta 03", correct: false },
-            { text: "resposta 04", correct: true },
-        ],
-    },
-];
+  ]
