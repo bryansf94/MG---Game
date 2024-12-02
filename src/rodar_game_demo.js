@@ -6,8 +6,8 @@ const $questionText = document.querySelector(".questions");
 const $answersContainer = document.querySelector(".answers-container");
 
 // Adicionando event listeners
-$botaoComecarGame.addEventListener("click", startGame);
-$nextQuestion.addEventListener("click", displayNextQuestions);
+$botaoComecarGame.addEventListener('click', startGame);
+$nextQuestion.addEventListener('click', displayNextQuestions);
 
 // Variáveis de estado
 let currentQuestionIndex = 0;
