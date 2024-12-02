@@ -7,25 +7,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="\img\icone.png" type="image/x-icon">
-  <link rel="stylesheet" href="/MG---Game/style/demo_style.css">
-  <link rel="stylesheet" href="css/reset.css">
-  <title>Demo - MG Game</title>
+  <link rel="stylesheet" href="../style/rodar_demo_style.css">
+  <title>Rodar Demo - MG Game</title>
 </head>
 <body>
   <main>
-    <h1>Demo</h1>
-    <p>A diversão começa agora, desafie sua mente com perguntas divertidas!</p>
-      <form action="">
-        <h2>Cadastrar Jogadores</h2>
-
-        <label for="player_name">Nome dos Jogadores:</label>
-        <input type="text" name="input_playername" id="input_playername">
-        
-        <input type="button" value="Salvar" id="btn_salvar_player">
-      </form>
+    <div class="container">
+      <div class="questions-container hide">
+        <span class="questions">Pergunte Aqui?</span>
+        <div class="answers-container">
+          <button class="answer button">Resposta 1</button>
+          <button class="answer button">Resposta 2</button>
+          <button class="answer button">Resposta 3</button>
+          <button class="answer button">Resposta 4</button>
+        </div>
+      </div>
+      <div class="controls-container">
+        <button class="btn_Iniciargame">Começar Quiz!</button>
+        <button class="next-question hide">Próxima pergunta</button>
+      </div>
+    </div>
   </main>
-
-  <script src="js\script.js" defer></script>
-
+  <script src="../src/rodar_game_demo.js" defer></script>
 </body>
 </html>
