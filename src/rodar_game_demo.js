@@ -1,238 +1,180 @@
-/* criando variavel que irá receber o clique do botão para iniciar o game na página inde html*/
-const $BotaoComeçarGame = document.querySelector(".btn_Iniciargame")
-/* criando variavel que irá receber a div das questões da página Rodar_Game*/
-const $questionsConnatianer = document.querySelector(".place.holder")
-// vvariavel com o botão de proxima pergunta
-const $nextQuestion = document.querySelector(".next-question")
-const $questionText = document.querySelector(".questions")
-const $answersContainer = document.querySelector(".answers-container")
-const $answers = document.querySelectorAll(".answer")
+// Seleção de elementos da página
+const $botaoComecarGame = document.querySelector(".btn_Iniciargame");
+const $questionsContainer = document.querySelector(".place.holder");
+const $nextQuestion = document.querySelector(".next-question");
+const $questionText = document.querySelector(".questions");
+const $answersContainer = document.querySelector(".answers-container");
 
-/*passando a variavel na função de iniciar o game */
-$BotaoComeçarGame.addEvenListener("click", startGame)
-/* iniciando a função de começar game */
-$nextQuestion.addEvenListener("click", displayNextQuestions)
-let currentQuestionsIndexx = 0;
+// Adicionando event listeners
+$botaoComecarGame.addEventListener("click", startGame);
+$nextQuestion.addEventListener("click", displayNextQuestions);
 
+// Variáveis de estado
+let currentQuestionIndex = 0;
+let totalCorrect = 0;
 
+// Função para iniciar o jogo
 function startGame() {
-/* Place Holder, ainda trabaalhando nisso */
-displayNextQuestions()
+    displayNextQuestions();
 }
 
+// Função para exibir a próxima pergunta
 function displayNextQuestions() {
-    resetState()
+    resetState();
 
-    if (questions === currentQuestionsIndexx){
-        return finishGame()
+    if (currentQuestionIndex >= questions.length) {
+        return finishGame();
     }
 
-//remevendo atributos do body
-document.body.removeAttribute("class")
+    document.body.removeAttribute("class");
+    const currentQuestion = questions[currentQuestionIndex];
+    $questionText.textContent = currentQuestion.question;
 
-// Define o texto da pergunta atual
-$questionText.textContent = questions[currentQuestionIndex].question
+    currentQuestion.answers.forEach(answer => {
+        const newAnswer = document.createElement("button");
+        newAnswer.classList.add("button", "answer");
+        newAnswer.textContent = answer.text;
 
-// Itera sobre cada resposta disponível para a pergunta atual
-questions[currentQuestionsIndexx].answers.forEach(answer => {
-    // Cria um novo botão para a resposta
-    const newAsnwer = document.createElement("button")
-    
-    // Adiciona classes ao botão, estilizando-o como um botão de resposta
-    newAsnwer.classList.add("button", "answer")
-    
-    // Define o texto do botão como o texto da resposta
-    newAsnwer.textContent = answer.text
-    
-    // Se a resposta for correta, adiciona um atributo de dados 'correct' ao botão
-    if (answer.correct) {
-        newAsnwer.dataset.correct = answer.correct
-    }
-    
-    // Adiciona o botão de resposta ao contêiner de respostas na interface
-    $answerConatiner.appendChild(newAsnwer)
+        if (answer.correct) {
+            newAnswer.dataset.correct = answer.correct;
+        }
 
-    // Adiciona um evento de clique ao botão de resposta para que, ao ser clicado,
-    // a função 'selectAnswer' seja executada
-    newAsnwer.addEventListener("click", selectAnswer)
-})
+        $answersContainer.appendChild(newAnswer);
+        newAnswer.addEventListener("click", selectAnswer);
+    });
 
-function resetState(){
-    while($answerConatiner.firstChild) {
-        $answerConatiner.removeChild($answerConatiner.firstChil)
+    $nextQuestion.classList.add("hide");
+}
+
+// Função para resetar o estado da interface
+function resetState() {
+    while ($answersContainer.firstChild) {
+        $answersContainer.removeChild($answersContainer.firstChild);
     }
 }
 
-}
-/* função que captura o evento da resposta selecionada pelo usuário e então confere se ela possui o atributo "correct" */
-
+// Função para selecionar uma resposta
 function selectAnswer(event) {
-const ansClicked = event.target
+    const selectedAnswer = event.target;
+    const correct = selectedAnswer.dataset.correct === "true";
 
-if(answerClicked.dataset.correct) {
-    document.body.classList.add("correct")
-    // essas classes são para manipular um atributo no css e indicar se a resposta está correta ou não, talvez podemos reutilizados //
-} else {
-    document.body.classList.add("incorrect")
-}
-document.querySelectorAll(".answer").forEach(button => {
-    if (button.dataset.correct){
-        button.body.classList.add("correct")
-
+    if (correct) {
+        document.body.classList.add("correct");
+        totalCorrect++;
     } else {
-        button.body.classList.add("correct")
+        document.body.classList.add("incorrect");
     }
 
-    button.disable = true
-})
-$nextQuestion.classList.remove("hide")
-currentQuestionsIndexx++
+    Array.from($answersContainer.children).forEach(button => {
+        const correct = button.dataset.correct === "true";
+        button.classList.add(correct ? "correct" : "incorrect");
+        button.disabled = true;
+    });
+
+    $nextQuestion.classList.remove("hide");
+    currentQuestionIndex++;
 }
+
+// Função para finalizar o jogo
 function finishGame() {
-    const totalQuestions = questions.length
-    const performance = Math.floor(totalCorrect * 100 / totalQuestions)
-    
-    let message = ""
-  
-    switch (true) {
-      case (performance >= 90):
-        message = "Excelente :)"
-        break
-      case (performance >= 70):
-        message = "Muito bom :)"
-        break
-      case (performance >= 50):
-        message = "Bom"
-        break
-      default:
-        message = "Pode melhorar :("
+    const totalQuestions = questions.length;
+    const performance = Math.floor((totalCorrect * 100) / totalQuestions);
+
+    let message;
+    if (performance >= 90) {
+        message = "Excelente :)";
+    } else if (performance >= 70) {
+        message = "Muito bom :)";
+    } else if (performance >= 50) {
+        message = "Bom";
+    } else {
+        message = "Pode melhorar :(";
     }
 
+    alert(`Jogo terminado! ${message}`);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-/* banco de perguntas e respostas que serão utilizadas em forma de objeto*/
+// Banco de perguntas e respostas
 const questions = [
     {
-        questions: "teste de pergunta",
+        question: "teste de pergunta",
         answers: [
-            {text: "resposta 01" , correct: false },
-            {text: "resposta 02" , correct: false },
-            {text: "resposta 03" , correct: false },
-            {text: "resposta 04" , correct: true },
-
-
-        ]
-
+            { text: "resposta 01", correct: false },
+            { text: "resposta 02", correct: false },
+            { text: "resposta 03", correct: false },
+            { text: "resposta 04", correct: true },
+        ],
     },
     {
-   questions: "teste de pergunta 002",
+        question: "teste de pergunta 002",
         answers: [
-            {text: "resposta 01" , correct: false },
-            {text: "resposta 02" , correct: true },
-            {text: "resposta 03" , correct: false },
-            {text: "resposta 04" , correct: false },
-
-
-        ]
-
+            { text: "resposta 01", correct: false },
+            { text: "resposta 02", correct: true },
+            { text: "resposta 03", correct: false },
+            { text: "resposta 04", correct: false },
+        ],
     },
     {
-        questions: "teste de pergunta 003",
-             answers: [
-                 {text: "resposta 01" , correct: true },
-                 {text: "resposta 02" , correct: false },
-                 {text: "resposta 03" , correct: false },
-                 {text: "resposta 04" , correct: false },
-     
-     
-             ]
-     
-         },
-         {
-            questions: "teste de pergunta 004",
-                 answers: [
-                     {text: "resposta 01" , correct: false },
-                     {text: "resposta 02" , correct: true },
-                     {text: "resposta 03" , correct: false },
-                     {text: "resposta 04" , correct: false },
-         
-         
-                 ]
-         
-             },
-             {
-                questions: "teste de pergunta 005",
-                     answers: [
-                         {text: "resposta 01" , correct: false },
-                         {text: "resposta 02" , correct: true },
-                         {text: "resposta 03" , correct: false },
-                         {text: "resposta 04" , correct: false },
-             
-             
-                     ]
-             
-                 },
-                 {
-                    questions: "teste de pergunta 006",
-                         answers: [
-                             {text: "resposta 01" , correct: false },
-                             {text: "resposta 02" , correct: false },
-                             {text: "resposta 03" , correct: false },
-                             {text: "resposta 04" , correct: true },
-                 
-                 
-                         ]
-                 
-                     },
-                     {
-                        questions: "teste de pergunta 007",
-                             answers: [
-                                 {text: "resposta 01" , correct: false },
-                                 {text: "resposta 02" , correct: false },
-                                 {text: "resposta 03" , correct: true },
-                                 {text: "resposta 04" , correct: false },
-                     
-                     
-                             ]
-                     
-                         },
-                         {
-                            questions: "teste de pergunta 008",
-                                 answers: [
-                                     {text: "resposta 01" , correct: false },
-                                     {text: "resposta 02" , correct: true },
-                                     {text: "resposta 03" , correct: false },
-                                     {text: "resposta 04" , correct: false },
-                         
-                         
-                                 ]
-                         
-                             },
-                             {
-                                questions: "teste de pergunta 009",
-                                     answers: [
-                                         {text: "resposta 01" , correct: false },
-                                         {text: "resposta 02" , correct: false },
-                                         {text: "resposta 03" , correct: false },
-                                         {text: "resposta 04" , correct: true },
-                             
-                             
-                                     ]
-                             
-                                 }
-
-
-]
-    
-
+        question: "teste de pergunta 003",
+        answers: [
+            { text: "resposta 01", correct: true },
+            { text: "resposta 02", correct: false },
+            { text: "resposta 03", correct: false },
+            { text: "resposta 04", correct: false },
+        ],
+    },
+    {
+        question: "teste de pergunta 004",
+        answers: [
+            { text: "resposta 01", correct: false },
+            { text: "resposta 02", correct: true },
+            { text: "resposta 03", correct: false },
+            { text: "resposta 04", correct: false },
+        ],
+    },
+    {
+        question: "teste de pergunta 005",
+        answers: [
+            { text: "resposta 01", correct: false },
+            { text: "resposta 02", correct: true },
+            { text: "resposta 03", correct: false },
+            { text: "resposta 04", correct: false },
+        ],
+    },
+    {
+        question: "teste de pergunta 006",
+        answers: [
+            { text: "resposta 01", correct: false },
+            { text: "resposta 02", correct: false },
+            { text: "resposta 03", correct: false },
+            { text: "resposta 04", correct: true },
+        ],
+    },
+    {
+        question: "teste de pergunta 007",
+        answers: [
+            { text: "resposta 01", correct: false },
+            { text: "resposta 02", correct: false },
+            { text: "resposta 03", correct: true },
+            { text: "resposta 04", correct: false },
+        ],
+    },
+    {
+        question: "teste de pergunta 008",
+        answers: [
+            { text: "resposta 01", correct: false },
+            { text: "resposta 02", correct: true },
+            { text: "resposta 03", correct: false },
+            { text: "resposta 04", correct: false },
+        ],
+    },
+    {
+        question: "teste de pergunta 009",
+        answers: [
+            { text: "resposta 01", correct: false },
+            { text: "resposta 02", correct: false },
+            { text: "resposta 03", correct: false },
+            { text: "resposta 04", correct: true },
+        ],
+    },
+];
