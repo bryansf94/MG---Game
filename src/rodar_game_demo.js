@@ -1,6 +1,6 @@
 // Seleção de elementos da página
 const $botaoComecarGame = document.querySelector(".btn_Iniciargame");
-const $questionsContainer = document.querySelector(".place.holder");
+const $questionsContainer = document.querySelector(".questions-container");
 const $nextQuestion = document.querySelector(".next-question");
 const $questionText = document.querySelector(".questions");
 const $answersContainer = document.querySelector(".answers-container");
@@ -92,6 +92,15 @@ function finishGame() {
     }
 
     alert(`Jogo terminado! ${message}`);
+
+    $questionsContainer.innerHTML = 
+    `
+        <p class="final-message">Questões acertadas ${totalCorrect} de ${totalQuestions} questões!</p>
+
+        <span>Resultado: </span>
+
+        <button onclick=window.location.reload() class="button"> Jogar novamente </button>
+    `
 }
 
 // Banco de perguntas e respostas
