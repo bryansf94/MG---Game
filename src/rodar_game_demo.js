@@ -63,7 +63,8 @@ function selectAnswer(event) {
 
     if (correct) {
         document.body.classList.add("correct");
-        totalCorrect++;
+        totalCorrect = totalCorrect + 100;
+        alert(`Você ganhou 100 pontos!`);
     } else {
         document.body.classList.add("incorrect");
     }
@@ -80,15 +81,16 @@ function selectAnswer(event) {
 
 // Função para finalizar o jogo
 function finishGame() {
-    const totalQuestions = questions.length;
-    const performance = Math.floor((totalCorrect * 100) / totalQuestions);
+    const totalQuestions = questions.length * 100;
+    const performance = totalCorrect;
+
 
     let message;
-    if (performance >= 90) {
-        message = "Excelente :)";
-    } else if (performance >= 70) {
+    if (performance >= 900) {
+        message = "Excelente! Você é quase um gerente de TI!)";
+    } else if (performance >= 700) {
         message = "Muito bom :)";
-    } else if (performance >= 50) {
+    } else if (performance >= 500) {
         message = "Bom";
     } else {
         message = "Pode melhorar :(";
@@ -98,9 +100,9 @@ function finishGame() {
 
     $questionsContainer.innerHTML = 
     `
-        <p class="final-message">Questões acertadas ${totalCorrect} de ${totalQuestions} questões!</p>
+        <p class="final-message">Você pontuou ${totalCorrect} de ${totalQuestions} pontos possíveis!</p>
 
-        <span>Resultado: </span>
+        <span>Obrigado por ter participado! </span>
 
         <button onclick=window.location.reload() class="button"> Jogar novamente </button>
     `
@@ -169,4 +171,22 @@ const questions = [
         { text: 'minhaFuncao()', correct: true },
       ]
     },
+    {
+        question: 'Como podemos chamar uma função chamada "minhaFuncao"?',
+        answers: [
+          { text: 'call minhaFuncao()', correct: false },
+          { text: 'call function minhaFuncao()', correct: false },
+          { text: 'Nenhum desses códigos chamaria essa função', correct: false },
+          { text: 'minhaFuncao()', correct: true },
+        ]
+      },
+      {
+        question: 'Como podemos chamar uma função chamada "minhaFuncao"?',
+        answers: [
+          { text: 'call minhaFuncao()', correct: false },
+          { text: 'call function minhaFuncao()', correct: false },
+          { text: 'Nenhum desses códigos chamaria essa função', correct: false },
+          { text: 'minhaFuncao()', correct: true },
+        ]
+      },
   ]
