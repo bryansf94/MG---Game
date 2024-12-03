@@ -6,8 +6,8 @@ const $questionText = document.querySelector(".questions");
 const $answersContainer = document.querySelector(".answers-container");
 
 // Adicionando event listeners
-$botaoComecarGame.addEventListener('click', startGame);
-$nextQuestion.addEventListener('click', displayNextQuestions);
+$botaoComecarGame.addEventListener("click", startGame);
+$nextQuestion.addEventListener("click", displayNextQuestions);
 
 // Variáveis de estado
 let currentQuestionIndex = 0;
@@ -15,7 +15,10 @@ let totalCorrect = 0;
 
 // Função para iniciar o jogo
 function startGame() {
+    
+    $questionsContainer.classList.remove("hide");
     displayNextQuestions();
+    $botaoComecarGame.classList.add("hide"); 
 }
 
 // Função para exibir a próxima pergunta
@@ -79,6 +82,8 @@ function selectAnswer(event) {
 function finishGame() {
     const totalQuestions = questions.length;
     const performance = Math.floor((totalCorrect * 100) / totalQuestions);
+    $nextQuestion.classList.add("hide"); 
+    $questionText.classList.add("hide"); 
 
     let message;
     if (performance >= 90) {
@@ -97,7 +102,12 @@ function finishGame() {
     `
         <p class="final-message">Questões acertadas ${totalCorrect} de ${totalQuestions} questões!</p>
 
-        <span>Resultado: </span>
+        <span>
+            Resultado: <br> 
+            Player 1 <br>
+            Player 2 <br>
+            Player 3
+        </span>
 
         <button onclick=window.location.reload() class="button"> Jogar novamente </button>
     `
