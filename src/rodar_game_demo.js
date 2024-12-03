@@ -18,7 +18,7 @@ function startGame() {
     $botaoComecarGame.classList.add("hide")
     $questionsContainer.classList.remove("hide")
     displayNextQuestions();
-    $botaoComecarGame.classList.add("hide"); 
+    
 }
 
 // Função para exibir a próxima pergunta
@@ -179,6 +179,76 @@ const questions = [
     answers: [
       { text: "Verdadeiro", correct: false },
       { text: "Falso", correct: true }
+    ]
+  },
+  {
+    question: "Em redes de computadores, um switch opera na camada de rede do modelo OSI.",
+    answers: [
+      { text: "Verdadeiro", correct: false },
+      { text: "Falso", correct: true }
+    ]
+  },
+  {
+    question: "O protocolo TCP é orientado à conexão e garante a entrega dos dados na mesma ordem em que foram enviados.",
+    answers: [
+      { text: "Verdadeiro", correct: true },
+      { text: "Falso", correct: false }
+    ]
+  },
+  {
+    question: "O DNS (Domain Name System) é responsável por traduzir endereços IP em nomes de domínio legíveis.",
+    answers: [
+      { text: "Verdadeiro", correct: true },
+      { text: "Falso", correct: false }
+    ]
+  },
+  {
+    question: "No modelo de rede OSI, a camada de apresentação é responsável por estabelecer, gerenciar e encerrar conexões entre aplicativos.",
+    answers: [
+      { text: "Verdadeiro", correct: false },
+      { text: "Falso", correct: true }
+    ]
+  },
+  {
+    question: "Um firewall é uma ferramenta que monitora e controla o tráfego de rede com base em regras de segurança pré-determinadas.",
+    answers: [
+      { text: "Verdadeiro", correct: true },
+      { text: "Falso", correct: false }
+    ]
+  },
+  {
+    question: "O protocolo HTTPS é uma versão segura do HTTP, utilizando SSL/TLS para criptografar a comunicação.",
+    answers: [
+      { text: "Verdadeiro", correct: true },
+      { text: "Falso", correct: false }
+    ]
+  },
+  {
+    question: "Em um banco de dados relacional, a integridade referencial é garantida pelo uso de chaves primárias e chaves estrangeiras.",
+    answers: [
+      { text: "Verdadeiro", correct: true },
+      { text: "Falso", correct: false }
+    ]
+  },
+  {
+    question: "A normalização de banco de dados é o processo de organizar os dados para reduzir a redundância e melhorar a integridade dos dados.",
+    answers: [
+      { text: "Verdadeiro", correct: true },
+      { text: "Falso", correct: false }
+    ]
+  },
+  {
+    question: "O comando SQL 'JOIN' é usado para combinar linhas de duas ou mais tabelas com base em uma condição relacionada.",
+    answers: [
+      { text: "Verdadeiro", correct: true },
+      { text: "Falso", correct: false }
+    ]
+  },
+  {
+    question: "Em um banco de dados, o índice é uma estrutura de dados que melhora a velocidade das operações de consulta em uma tabela.",
+    answers: [
+      { text: "Verdadeiro", correct: true },
+      { text: "Falso", correct: false }
     ]
   }
 ];
