@@ -88,3 +88,13 @@ img{
     margin: 0 auto;
     text-align: justify;
 }
+
+.logo{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.copy{
+    font-weight: bolder;
+    font-size: 10pt;
+}
