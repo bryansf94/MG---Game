@@ -5,6 +5,54 @@ const $nextQuestion = document.querySelector(".next-question");
 const $questionText = document.querySelector(".questions");
 const $answersContainer = document.querySelector(".answers-container");
 
+const $conteudoGlobal = document.querySelector(".conteudo_form");
+const $containerForm = document.querySelector(".form");
+const $nomeJogadores = document.querySelector(".txt_nome_players");
+const $quantidadePontos = document.querySelector(".txt_qtd_pontos");
+
+const $botaoCadastrarNome = document.querySelector(".btn_cadastrar");
+const $resultado = document.querySelector(".resultado");
+const $botaoConcluir = document.querySelector(".btn_concluir");
+const $containerGame = document.querySelector(".container_perguntas");
+
+let $nomes = [];
+
+$botaoCadastrarNome.addEventListener("click", adicionarNome);
+$botaoConcluir.addEventListener("click", alternarContainers);
+
+//Adicionando os Nomes
+function adicionarNome(){
+  
+  let $nome = $nomeJogadores.value;
+  
+  if($nome.trim().length === 0){
+    alert("Error! Preencha os nomes dos jogadores.");
+  }else{
+    $nomes.push($nome);
+    
+    $resultado.innerHTML = `
+    <h4>Nomes Cadastrados:</h4>
+    <h5>Total de Pontos: ${$quantidadePontos.value}</h5>
+    <ul> 
+    <li> 
+    <span>${$nomes.map(($nome, index) => `${index + 1} - ${$nome}`).join('<br>')}</span> </li> </ul>
+  `;
+  };
+  
+  $nomeJogadores.value = "";
+
+  if($nomes.length == 4){
+    $botaoCadastrarNome.classList.add("hide");
+    $botaoConcluir.classList.remove("hide");
+  };
+};
+
+//Aternando entre a exibição dos containers
+function alternarContainers(){
+  $containerGame.classList.remove("hide");
+  $conteudoGlobal.classList.add("hide");
+};
+
 // Adicionando event listeners
 $botaoComecarGame.addEventListener("click", startGame);
 $nextQuestion.addEventListener("click", displayNextQuestions);

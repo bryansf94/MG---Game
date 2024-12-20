@@ -13,7 +13,7 @@
 <body>
   <main>    
     
-    <div class="conteudo">
+    <div class="conteudo_form">
       <section class="text">
     
         <h1>Demo</h1>
@@ -21,26 +21,24 @@
       </section>
 
       <section class="container_form">
-        <form action="" class="form1">
+        <form action="" class="form">
       
           <h2>Cadastrar Jogadores</h2>
     
-          <label for="nome">Nome dos jogadores:</label>
-          <input type="text" name="nome_players" class="nome_players">
-
           <label for="pontos">Quantidade total de pontos:</label>
-          <input type="number" name="qtd_pontos" class="qtd_pontos">
-          
-          <input type="button" value="Cadastrar" class="btn_cadastrar">
+          <input type="number" name="qtd_pontos" class="txt_qtd_pontos">
+
+          <label for="nome">Nome dos jogadores:</label>
+          <input type="text" name="nome_players" class="txt_nome_players">
 
           <div class="resultado"></div>
-
-          <input type="button" value="Concluir" class="btn_concluir hide"> 
+          <input type="button" value="Cadastrar" class="btn_cadastrar">
         </form>
+        <button class="btn_concluir hide">Concluir</button>
       </section>
     </div> 
     
-    <div class="container hide"> 
+    <div class="container_perguntas hide"> 
       <div class="questions-container hide">
         <span class="questions">Quiz da TI</span> 
         <div class="answers-container">
@@ -50,6 +48,7 @@
           <button class="answer button hide">Resposta 4</button>
         </div>
       </div>
+
       <div class="controls-container">
         <button class="btn_Iniciargame">Começar Quiz!</button>
         <button class="next-question hide">Próxima pergunta</button>
