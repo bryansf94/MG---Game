@@ -71,7 +71,6 @@ function updateTurnOrder() {
   displayCurrentPlayer();
 };
 
-
 //Atualiza o placar
 function updateScoreBoard() {
   const $scoreBoardContainer = document.getElementById('scoreBoardContainer');
@@ -122,6 +121,8 @@ let totalCorrect = 0;
 function startGame() {
   $botaoComecarGame.classList.add("hide")
   $questionsContainer.classList.remove("hide")
+    
+    $questionsContainer.classList.remove("hide");
   $registeredPlayers.classList.remove("hide");
   
   displayNextQuestions();
@@ -129,10 +130,8 @@ function startGame() {
   updateScoreBoard();
     
 }
+    $botaoComecarGame.classList.add("hide"); 
 
-// Função para exibir a próxima pergunta
-function displayNextQuestions() {
-    resetState();
 
     if (currentQuestionIndex >= questions.length) {
         return finishGame();
@@ -155,15 +154,14 @@ function displayNextQuestions() {
         newAnswer.addEventListener("click", selectAnswer);
     });
 
-}
+    $nextQuestion.classList.add("hide");
+
 
 // Função para resetar o estado da interface
 function resetState() {
     while ($answersContainer.firstChild) {
         $answersContainer.removeChild($answersContainer.firstChild);
     }
-  document.body.removeAttribute("class")
-  $nextQuestion.classList.add("hide")
 }
 
 // Função para selecionar uma resposta
@@ -173,8 +171,7 @@ function selectAnswer(event) {
 
     if (correct) {
         document.body.classList.add("correct");
-        totalCorrect = totalCorrect + 100;
-        alert(`Você ganhou 100 pontos!`);
+        totalCorrect++;
     } else {
         document.body.classList.add("incorrect");
     }
@@ -191,16 +188,17 @@ function selectAnswer(event) {
 
 // Função para finalizar o jogo
 function finishGame() {
-    const totalQuestions = questions.length * 100;
-    const performance = totalCorrect;
-
+    const totalQuestions = questions.length;
+    const performance = Math.floor((totalCorrect * 100) / totalQuestions);
+    $nextQuestion.classList.add("hide"); 
+    $questionText.classList.add("hide"); 
 
     let message;
-    if (performance >= 900) {
-        message = "Excelente! Você é quase um gerente de TI!)";
-    } else if (performance >= 700) {
+    if (performance >= 90) {
+        message = "Excelente :)";
+    } else if (performance >= 70) {
         message = "Muito bom :)";
-    } else if (performance >= 500) {
+    } else if (performance >= 50) {
         message = "Bom";
     } else {
         message = "Pode melhorar :(";
@@ -210,7 +208,7 @@ function finishGame() {
 
     $questionsContainer.innerHTML = 
     `
-        <p class="final-message">Você pontuou ${totalCorrect} de ${totalQuestions} pontos possíveis!</p>
+        <p class="final-message">Questões acertadas ${totalCorrect} de ${totalQuestions} questões!</p>
 
         <span>Obrigado por ter participado! </span>
 

@@ -22,7 +22,4 @@ As Sprints estão organizadas da seguinte forma:
 - A sprint será realizada em até 6 dias.
 - A organização do Trabalho será feita via Trello.
 
-## Status:
-
-- Aguardando ínicio do levantamento de requisitos.
 
