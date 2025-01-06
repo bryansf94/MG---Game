@@ -7,55 +7,112 @@ const $answersContainer = document.querySelector(".answers-container");
 
 const $conteudoGlobal = document.querySelector(".conteudo_form");
 const $containerForm = document.querySelector(".form");
-const $nomeJogadores = document.querySelector(".txt_nome_players");
-const $quantidadePontos = document.querySelector(".txt_qtd_pontos");
+const $registeredPlayers = document.querySelector('.gameArea');
 
-const $botaoCadastrarNome = document.querySelector(".btn_cadastrar");
-const $resultado = document.querySelector(".resultado");
+const $botaoCadastrarPlayer = document.querySelector(".btn_cadastrar");
 const $botaoConcluir = document.querySelector(".btn_concluir");
 const $containerGame = document.querySelector(".container_perguntas");
 
-let $nomes = [];
+let $players = [];
+let $currentTurn = 0;
+let $scores = {};
 
-$botaoCadastrarNome.addEventListener("click", adicionarNome);
-$botaoConcluir.addEventListener("click", alternarContainers);
+document.querySelector('.playerName').addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+      event.preventDefault(); // Previne o comportamento padrão do "Enter"
+      addPlayer();
+  }
+});
 
-//Adicionando os Nomes
-function adicionarNome(){
+//Adiciona os Jogadores
+function addPlayer() {
+  const $playerName = document.querySelector('.playerName').value.trim();
   
-  let $nome = $nomeJogadores.value;
-  
-  if($nome.trim().length === 0){
-    alert("Error! Preencha os nomes dos jogadores.");
-  }else{
-    $nomes.push($nome);
-    
-    $resultado.innerHTML = `
-    <h4>Nomes Cadastrados:</h4>
-    <h5>Total de Pontos: ${$quantidadePontos.value}</h5>
-    <ul> 
-    <li> 
-    <span>${$nomes.map(($nome, index) => `${index + 1} - ${$nome}`).join('<br>')}</span> </li> </ul>
-  `;
-  };
-  
-  $nomeJogadores.value = "";
-
-  if($nomes.length == 4){
-    $botaoCadastrarNome.classList.add("hide");
-    $botaoConcluir.classList.remove("hide");
+  if ($playerName && $players.length < 4) {
+      $players.push($playerName);
+      $scores[$playerName] = 0;
+      document.querySelector('.playerName').value = ''; // Limpa o campo de entrada
+      updatePlayerList();
+  } else if ($players.length >= 4) {
+      alert('Você já cadastrou 4 jogadores!');
+  } else {
+      alert('Digite um nome válido para o jogador.');
   };
 };
 
-//Aternando entre a exibição dos containers
-function alternarContainers(){
+//Atualiza a lista de Jogadores
+function updatePlayerList() {
+  const $playerList = document.querySelector('.playerList');
+  $playerList.innerHTML = ''; // Limpa a lista atual
+
+  $players.forEach(($player, index) => {
+      const li = document.createElement('li');
+      li.textContent = `${index + 1}. ${$player}`;
+      $playerList.appendChild(li);
+  });
+
+  if ($players.length === 4) {
+    $botaoCadastrarPlayer.classList.add("hide");
+    modifyContainers(); 
+  };
+};
+
+//Atualiza o ordem de jogadores
+function updateTurnOrder() {
+  const $turnOrder = document.getElementById('turnOrder');
+  $turnOrder.innerHTML = '';
+
+  $players.forEach($player => {
+      const li = document.createElement('li');
+      li.textContent = $player;
+      $turnOrder.appendChild(li);
+  });
+
+  displayCurrentPlayer();
+};
+
+
+//Atualiza o placar
+function updateScoreBoard() {
+  const $scoreBoardContainer = document.getElementById('scoreBoardContainer');
+  $scoreBoardContainer.innerHTML = '<h2>Pontuação</h2>'; // Limpa a área e coloca o título
+
+  $players.forEach($player => {
+      const $scoreBox = document.createElement('div');
+      $scoreBox.classList.add('scoreBox');
+      $scoreBox.innerHTML = `${$player} - ${$scores[$player]} pts;`
+      $scoreBoardContainer.appendChild($scoreBox);
+  });
+};
+
+//Exibe o Jogador atual
+function displayCurrentPlayer() {
+  const $currentPlayer = document.getElementById('currentPlayer');
+  $currentPlayer.textContent = `Vez de: ${$players[$currentTurn]}`;
+};
+
+//Distribui pontos para o jogador atual
+function nextTurn() {
+  const $points = Math.floor(Math.random() * 10); // Gera pontos aleatórios entre 0 e 9
+  $scores[$players[$currentTurn]] += $points;
+  updateScoreBoard();
+ $currentTurn = ($currentTurn + 1) % $players.length; // Passa para o próximo jogador
+  displayCurrentPlayer();
+};
+
+//Modifica a exibição dos Container's
+function modifyContainers(){
   $containerGame.classList.remove("hide");
   $conteudoGlobal.classList.add("hide");
 };
 
+
 // Adicionando event listeners
 $botaoComecarGame.addEventListener("click", startGame);
 $nextQuestion.addEventListener("click", displayNextQuestions);
+$nextQuestion.addEventListener("click", nextTurn);
+$botaoCadastrarPlayer.addEventListener("click", addPlayer);
+
 
 // Variáveis de estado
 let currentQuestionIndex = 0;
@@ -63,9 +120,13 @@ let totalCorrect = 0;
 
 // Função para iniciar o jogo
 function startGame() {
-    $botaoComecarGame.classList.add("hide")
-    $questionsContainer.classList.remove("hide")
-    displayNextQuestions();
+  $botaoComecarGame.classList.add("hide")
+  $questionsContainer.classList.remove("hide")
+  $registeredPlayers.classList.remove("hide");
+  
+  displayNextQuestions();
+  updateTurnOrder();
+  updateScoreBoard();
     
 }
 

@@ -63,7 +63,7 @@ main{
     box-shadow: 0px 0px 10px var(--cor2);
 }
 
-.txt_nome_players{
+.playerName{
     width: 60%;
     height: 30px;
     padding: 10px;
@@ -72,16 +72,12 @@ main{
     outline: none;
 }
 
-.txt_qtd_pontos{
+.playerScore{
     height: 30px;
     padding: 10px;
     border-radius: 5px;
     border: none;
     outline: none;
-}
-
-.btn_concluir{
-    margin-top: 20px;
 }
 
 .btn_cadastrar{
@@ -110,6 +106,58 @@ ul{
 ul li{
     list-style: none;
     padding: 5px 0px;
+}
+
+
+.playerList {
+    margin-top: 5px;
+    list-style: none;
+}
+
+.gameArea {
+    margin-top: 30px;
+    margin-top: 30px;
+    position: fixed;
+    top: -11px;
+    right: 20px;
+    background-color: var(--cor3);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px var(--cor4);
+    width: 250px;
+    text-align: center;
+}
+
+#turnOrder li, #scoreBoard li {
+    margin-bottom: 10px;
+}
+
+#scoreBoardContainer {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: var(--cor3);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px var(--cor4);
+    width: 250px;
+    text-align: center;
+}
+
+#scoreBoardContainer h2 {
+    color: #56ccf2;
+    margin-bottom: 10px;
+}
+
+.scoreBox {
+    background-color: #2c3e50;  
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #56ccf2; 
+    text-align: center;
+    
 }
 
 .container_perguntas{

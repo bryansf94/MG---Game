@@ -26,18 +26,23 @@
           <h2>Cadastrar Jogadores</h2>
     
           <label for="pontos">Quantidade total de pontos:</label>
-          <input type="number" name="qtd_pontos" class="txt_qtd_pontos">
+          <input type="number" name="qtd_pontos" class="playerScore">
 
           <label for="nome">Nome dos jogadores:</label>
-          <input type="text" name="nome_players" class="txt_nome_players">
+          <input type="text" name="nome_players" class="playerName">
 
-          <div class="resultado"></div>
+          <div class="playerList"></div>
           <input type="button" value="Cadastrar" class="btn_cadastrar">
         </form>
-        <button class="btn_concluir hide">Concluir</button>
       </section>
     </div> 
     
+    <div class="gameArea hide">
+      <h2 id="currentPlayer">Vez de: </h2>
+      <ul id="turnOrder"></ul>
+      <div id="scoreBoardContainer"></div>
+    </div>
+
     <div class="container_perguntas hide"> 
       <div class="questions-container hide">
         <span class="questions">Quiz da TI</span> 
