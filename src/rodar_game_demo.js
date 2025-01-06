@@ -121,41 +121,39 @@ let totalCorrect = 0;
 function startGame() {
   $botaoComecarGame.classList.add("hide")
   $questionsContainer.classList.remove("hide")
-    
-    $questionsContainer.classList.remove("hide");
   $registeredPlayers.classList.remove("hide");
   
   displayNextQuestions();
   updateTurnOrder();
   updateScoreBoard();
     
-}
-    $botaoComecarGame.classList.add("hide"); 
+};
+   
+function displayNextQuestions() {
+  resetState();
 
+  if (currentQuestionIndex >= questions.length) {
+      return finishGame();
+  }
 
-    if (currentQuestionIndex >= questions.length) {
-        return finishGame();
-    }
+  document.body.removeAttribute("class");
+  const currentQuestion = questions[currentQuestionIndex];
+  $questionText.textContent = currentQuestion.question;
 
-    document.body.removeAttribute("class");
-    const currentQuestion = questions[currentQuestionIndex];
-    $questionText.textContent = currentQuestion.question;
+  currentQuestion.answers.forEach(answer => {
+      const newAnswer = document.createElement("button");
+      newAnswer.classList.add("button", "answer");
+      newAnswer.textContent = answer.text;
 
-    currentQuestion.answers.forEach(answer => {
-        const newAnswer = document.createElement("button");
-        newAnswer.classList.add("button", "answer");
-        newAnswer.textContent = answer.text;
+      if (answer.correct) {
+          newAnswer.dataset.correct = answer.correct;
+      }
 
-        if (answer.correct) {
-            newAnswer.dataset.correct = answer.correct;
-        }
+      $answersContainer.appendChild(newAnswer);
+      newAnswer.addEventListener("click", selectAnswer);
+  });
 
-        $answersContainer.appendChild(newAnswer);
-        newAnswer.addEventListener("click", selectAnswer);
-    });
-
-    $nextQuestion.classList.add("hide");
-
+};
 
 // Função para resetar o estado da interface
 function resetState() {
@@ -166,55 +164,55 @@ function resetState() {
 
 // Função para selecionar uma resposta
 function selectAnswer(event) {
-    const selectedAnswer = event.target;
-    const correct = selectedAnswer.dataset.correct === "true";
+  const selectedAnswer = event.target;
+  const correct = selectedAnswer.dataset.correct === "true";
 
-    if (correct) {
-        document.body.classList.add("correct");
-        totalCorrect++;
-    } else {
-        document.body.classList.add("incorrect");
-    }
+  if (correct) {
+      document.body.classList.add("correct");
+      totalCorrect = totalCorrect + 100;
+      alert(`Você ganhou 100 pontos!`);
+  } else {
+      document.body.classList.add("incorrect");
+  }
 
-    Array.from($answersContainer.children).forEach(button => {
-        const correct = button.dataset.correct === "true";
-        button.classList.add(correct ? "correct" : "incorrect");
-        button.disabled = true;
-    });
+  Array.from($answersContainer.children).forEach(button => {
+      const correct = button.dataset.correct === "true";
+      button.classList.add(correct ? "correct" : "incorrect");
+      button.disabled = true;
+  });
 
-    $nextQuestion.classList.remove("hide");
-    currentQuestionIndex++;
-}
+  $nextQuestion.classList.remove("hide");
+  currentQuestionIndex++;
+};
 
 // Função para finalizar o jogo
 function finishGame() {
-    const totalQuestions = questions.length;
-    const performance = Math.floor((totalCorrect * 100) / totalQuestions);
-    $nextQuestion.classList.add("hide"); 
-    $questionText.classList.add("hide"); 
+  const totalQuestions = questions.length * 100;
+  const performance = totalCorrect;
 
-    let message;
-    if (performance >= 90) {
-        message = "Excelente :)";
-    } else if (performance >= 70) {
-        message = "Muito bom :)";
-    } else if (performance >= 50) {
-        message = "Bom";
-    } else {
-        message = "Pode melhorar :(";
-    }
 
-    alert(`Jogo terminado! ${message}`);
+  let message;
+  if (performance >= 900) {
+      message = "Excelente! Você é quase um gerente de TI!)";
+  } else if (performance >= 700) {
+      message = "Muito bom :)";
+  } else if (performance >= 500) {
+      message = "Bom";
+  } else {
+      message = "Pode melhorar :(";
+  }
 
-    $questionsContainer.innerHTML = 
-    `
-        <p class="final-message">Questões acertadas ${totalCorrect} de ${totalQuestions} questões!</p>
+  alert(`Jogo terminado! ${message}`);
 
-        <span>Obrigado por ter participado! </span>
+  $questionsContainer.innerHTML = 
+  `
+      <p class="final-message">Você pontuou ${totalCorrect} de ${totalQuestions} pontos possíveis!</p>
 
-        <button onclick=window.location.reload() class="button"> Jogar novamente </button>
-    `
-}
+      <span>Obrigado por ter participado! </span>
+
+      <button onclick=window.location.reload() class="button"> Jogar novamente </button>
+  `
+};
 
 // Banco de perguntas e respostas
 const questions = [
