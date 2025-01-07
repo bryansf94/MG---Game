@@ -13,6 +13,8 @@ const $botaoCadastrarPlayer = document.querySelector(".btn_cadastrar");
 const $botaoConcluir = document.querySelector(".btn_concluir");
 const $containerGame = document.querySelector(".container_perguntas");
 
+//const $point = document.querySelector('.playerScore').value;
+
 let $players = [];
 let $currentTurn = 0;
 let $scores = {};
@@ -90,7 +92,7 @@ function displayCurrentPlayer() {
   $currentPlayer.textContent = `Vez de: ${$players[$currentTurn]}`;
 };
 
-//Distribui pontos para o jogador atual
+ //Distribui pontos para o jogador atual
 function nextTurn() {
   const $points = Math.floor(Math.random() * 10); // Gera pontos aleatórios entre 0 e 9
   $scores[$players[$currentTurn]] += $points;
@@ -99,12 +101,12 @@ function nextTurn() {
   displayCurrentPlayer();
 };
 
+
 //Modifica a exibição dos Container's
 function modifyContainers(){
   $containerGame.classList.remove("hide");
   $conteudoGlobal.classList.add("hide");
 };
-
 
 // Adicionando event listeners
 $botaoComecarGame.addEventListener("click", startGame);
@@ -112,46 +114,45 @@ $nextQuestion.addEventListener("click", displayNextQuestions);
 $nextQuestion.addEventListener("click", nextTurn);
 $botaoCadastrarPlayer.addEventListener("click", addPlayer);
 
-
 // Variáveis de estado
 let currentQuestionIndex = 0;
 let totalCorrect = 0;
 
 // Função para iniciar o jogo
 function startGame() {
-  $botaoComecarGame.classList.add("hide")
-  $questionsContainer.classList.remove("hide")
-  $registeredPlayers.classList.remove("hide");
-  
-  displayNextQuestions();
-  updateTurnOrder();
-  updateScoreBoard();
+    $botaoComecarGame.classList.add("hide")
+    $questionsContainer.classList.remove("hide")
+    $registeredPlayers.classList.remove("hide");
     
+    displayNextQuestions();
+    updateTurnOrder();
+    updateScoreBoard();
 };
-   
+
+// Função para exibir a próxima pergunta
 function displayNextQuestions() {
-  resetState();
+    resetState();
 
-  if (currentQuestionIndex >= questions.length) {
-      return finishGame();
-  }
+    if (currentQuestionIndex >= questions.length) {
+        return finishGame();
+    }
 
-  document.body.removeAttribute("class");
-  const currentQuestion = questions[currentQuestionIndex];
-  $questionText.textContent = currentQuestion.question;
+    document.body.removeAttribute("class");
+    const currentQuestion = questions[currentQuestionIndex];
+    $questionText.textContent = currentQuestion.question;
 
-  currentQuestion.answers.forEach(answer => {
-      const newAnswer = document.createElement("button");
-      newAnswer.classList.add("button", "answer");
-      newAnswer.textContent = answer.text;
+    currentQuestion.answers.forEach(answer => {
+        const newAnswer = document.createElement("button");
+        newAnswer.classList.add("button", "answer");
+        newAnswer.textContent = answer.text;
 
-      if (answer.correct) {
-          newAnswer.dataset.correct = answer.correct;
-      }
+        if (answer.correct) {
+            newAnswer.dataset.correct = answer.correct;
+        }
 
-      $answersContainer.appendChild(newAnswer);
-      newAnswer.addEventListener("click", selectAnswer);
-  });
+        $answersContainer.appendChild(newAnswer);
+        newAnswer.addEventListener("click", selectAnswer);
+    });
 
 };
 
@@ -160,58 +161,60 @@ function resetState() {
     while ($answersContainer.firstChild) {
         $answersContainer.removeChild($answersContainer.firstChild);
     }
-}
+  document.body.removeAttribute("class")
+  $nextQuestion.classList.add("hide")
+};
 
 // Função para selecionar uma resposta
 function selectAnswer(event) {
-  const selectedAnswer = event.target;
-  const correct = selectedAnswer.dataset.correct === "true";
+    const selectedAnswer = event.target;
+    const correct = selectedAnswer.dataset.correct === "true";
 
-  if (correct) {
-      document.body.classList.add("correct");
-      totalCorrect = totalCorrect + 100;
-      alert(`Você ganhou 100 pontos!`);
-  } else {
-      document.body.classList.add("incorrect");
-  }
+    if (correct) {
+        document.body.classList.add("correct");
+        totalCorrect = totalCorrect + 100;
+        alert(`Você ganhou 100 pontos!`);
+    } else {
+        document.body.classList.add("incorrect");
+    }
 
-  Array.from($answersContainer.children).forEach(button => {
-      const correct = button.dataset.correct === "true";
-      button.classList.add(correct ? "correct" : "incorrect");
-      button.disabled = true;
-  });
+    Array.from($answersContainer.children).forEach(button => {
+        const correct = button.dataset.correct === "true";
+        button.classList.add(correct ? "correct" : "incorrect");
+        button.disabled = true;
+    });
 
-  $nextQuestion.classList.remove("hide");
-  currentQuestionIndex++;
+    $nextQuestion.classList.remove("hide");
+    currentQuestionIndex++;
 };
 
 // Função para finalizar o jogo
 function finishGame() {
-  const totalQuestions = questions.length * 100;
-  const performance = totalCorrect;
+    const totalQuestions = questions.length * 100;
+    const performance = totalCorrect;
 
 
-  let message;
-  if (performance >= 900) {
-      message = "Excelente! Você é quase um gerente de TI!)";
-  } else if (performance >= 700) {
-      message = "Muito bom :)";
-  } else if (performance >= 500) {
-      message = "Bom";
-  } else {
-      message = "Pode melhorar :(";
-  }
+    let message;
+    if (performance >= 900) {
+        message = "Excelente! Você é quase um gerente de TI!)";
+    } else if (performance >= 700) {
+        message = "Muito bom :)";
+    } else if (performance >= 500) {
+        message = "Bom";
+    } else {
+        message = "Pode melhorar :(";
+    }
 
-  alert(`Jogo terminado! ${message}`);
+    alert(`Jogo terminado! ${message}`);
 
-  $questionsContainer.innerHTML = 
-  `
-      <p class="final-message">Você pontuou ${totalCorrect} de ${totalQuestions} pontos possíveis!</p>
+    $questionsContainer.innerHTML = 
+    `
+        <p class="final-message">Você pontuou ${totalCorrect} de ${totalQuestions} pontos possíveis!</p>
 
-      <span>Obrigado por ter participado! </span>
+        <span>Obrigado por ter participado! </span>
 
-      <button onclick=window.location.reload() class="button"> Jogar novamente </button>
-  `
+        <button onclick=window.location.reload() class="button"> Jogar novamente </button>
+    `
 };
 
 // Banco de perguntas e respostas
