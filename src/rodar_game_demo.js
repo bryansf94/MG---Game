@@ -13,7 +13,8 @@ const $botaoCadastrarPlayer = document.querySelector(".btn_cadastrar");
 const $botaoConcluir = document.querySelector(".btn_concluir");
 const $containerGame = document.querySelector(".container_perguntas");
 
-//const $point = document.querySelector('.playerScore').value;
+const $point = document.querySelector('.playerScore').value;
+console.log($point);
 
 let $players = [];
 let $currentTurn = 0;
@@ -26,7 +27,7 @@ document.querySelector('.playerName').addEventListener('keydown', function(event
   }
 });
 
-//Adiciona os Jogadores
+//Adiciona os Jogadores no array
 function addPlayer() {
   const $playerName = document.querySelector('.playerName').value.trim();
   
@@ -42,7 +43,7 @@ function addPlayer() {
   };
 };
 
-//Atualiza a lista de Jogadores
+//Atualiza a lista de Jogadores, insere eles com o index
 function updatePlayerList() {
   const $playerList = document.querySelector('.playerList');
   $playerList.innerHTML = ''; // Limpa a lista atual
@@ -59,7 +60,7 @@ function updatePlayerList() {
   };
 };
 
-//Atualiza o ordem de jogadores
+//Atualiza o ordem de jogadores no turno
 function updateTurnOrder() {
   const $turnOrder = document.getElementById('turnOrder');
   $turnOrder.innerHTML = '';
@@ -73,7 +74,7 @@ function updateTurnOrder() {
   displayCurrentPlayer();
 };
 
-//Atualiza o placar
+//Atualiza e adiciona o jogador no placar
 function updateScoreBoard() {
   const $scoreBoardContainer = document.getElementById('scoreBoardContainer');
   $scoreBoardContainer.innerHTML = '<h2>Pontuação</h2>'; // Limpa a área e coloca o título
