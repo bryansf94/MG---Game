@@ -13,8 +13,7 @@ const $botaoCadastrarPlayer = document.querySelector(".btn_cadastrar");
 const $botaoConcluir = document.querySelector(".btn_concluir");
 const $containerGame = document.querySelector(".container_perguntas");
 
-const $point = document.querySelector('.playerScore').value;
-console.log($point);
+//const $point = document.querySelector('.playerScore').value;
 
 let $players = [];
 let $currentTurn = 0;
