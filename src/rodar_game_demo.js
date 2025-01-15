@@ -10,14 +10,17 @@ const $containerForm = document.querySelector(".form");
 const $registeredPlayers = document.querySelector('.gameArea');
 
 const $botaoCadastrarPlayer = document.querySelector(".btn_cadastrar");
-const $botaoConcluir = document.querySelector(".btn_concluir");
+//const $botaoConcluir = document.querySelector(".btn_concluir");
 const $containerGame = document.querySelector(".container_perguntas");
-
-//const $point = document.querySelector('.playerScore').value;
 
 let $players = [];
 let $currentTurn = 0;
+
+let $order = [];
+let $questionCount = 0;
+
 let $scores = {};
+let $points = 100;
 
 document.querySelector('.playerName').addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
@@ -53,9 +56,21 @@ function updatePlayerList() {
       $playerList.appendChild(li);
   });
 
-  if ($players.length === 4) {
+  if ($players.length == 4) {
     $botaoCadastrarPlayer.classList.add("hide");
+    $order = [...$players];
     modifyContainers(); 
+    shufflePlayers();
+    displayCurrentPlayer();
+    updateScoreBoard();
+  };
+};
+
+//Embaralha a ordem dos jogadores
+function shufflePlayers() {
+  for (let i = $order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [$order[i], $order[j]] = [$order[j], $order[i]];
   };
 };
 
@@ -64,7 +79,7 @@ function updateTurnOrder() {
   const $turnOrder = document.getElementById('turnOrder');
   $turnOrder.innerHTML = '';
 
-  $players.forEach($player => {
+  $order.forEach($player => {
       const li = document.createElement('li');
       li.textContent = $player;
       $turnOrder.appendChild(li);
@@ -89,16 +104,32 @@ function updateScoreBoard() {
 //Exibe o Jogador atual
 function displayCurrentPlayer() {
   const $currentPlayer = document.getElementById('currentPlayer');
-  $currentPlayer.textContent = `Vez de: ${$players[$currentTurn]}`;
+  $currentPlayer.textContent = `Vez de: ${$order[$currentTurn]}`;
 };
 
  //Distribui pontos para o jogador atual
 function nextTurn() {
-  const $points = Math.floor(Math.random() * 10); // Gera pontos aleatórios entre 0 e 9
-  $scores[$players[$currentTurn]] += $points;
-  updateScoreBoard();
- $currentTurn = ($currentTurn + 1) % $players.length; // Passa para o próximo jogador
+  
+  if (($questionCount + 1) % 5 === 0) {
+    $points = Math.floor(Math.random() * 100) + 101;
+    alert(`Você ganhou ${$points} pontos especiais!`); 
+  }else {
+    $points = 100;
+  };
+  
+  const currentPlayer = $order[$currentTurn];
+  $scores[currentPlayer] += $points;
+  $questionCount++;
+  $currentTurn++;
+
+  if ($currentTurn >= $order.length) {
+    $currentTurn = 0; 
+    shufflePlayers(); 
+  };
+
   displayCurrentPlayer();
+  updateScoreBoard();
+  return $points;
 };
 
 
@@ -173,7 +204,7 @@ function selectAnswer(event) {
     if (correct) {
         document.body.classList.add("correct");
         totalCorrect = totalCorrect + 100;
-        alert(`Você ganhou 100 pontos!`);
+        alert(`Você ganhou ${$points} pontos!`);
     } else {
         document.body.classList.add("incorrect");
     }
@@ -193,6 +224,14 @@ function finishGame() {
     const totalQuestions = questions.length * 100;
     const performance = totalCorrect;
 
+    let winner = null;
+    let maxScore = 0;
+
+    for (const [player, score] of Object.entries($scores)) { 
+      if (score > maxScore) { 
+        maxScore = score; winner = player; 
+      };
+    };
 
     let message;
     if (performance >= 900) {
@@ -210,11 +249,11 @@ function finishGame() {
     $questionsContainer.innerHTML = 
     `
         <p class="final-message">Você pontuou ${totalCorrect} de ${totalQuestions} pontos possíveis!</p>
-
+        <h3>Vencedor: ${winner} com ${maxScore} pontos! </h3>
         <span>Obrigado por ter participado! </span>
 
         <button onclick=window.location.reload() class="button"> Jogar novamente </button>
-    `
+    `;
 };
 
 // Banco de perguntas e respostas
