@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #111;
+    color: white;
+}
+
+.screen {
+    display: none;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#cadastro, #instrucoes, #jogo {
+    display: block;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    border: 2px solid #2208b4;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2208b4;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    background-color: #222;
+    color: white;
+    width: 200px;
+    font-size: 16px;
+}
+
+#perguntaText {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#jogadores {
+    font-size: 18px;
+}
+
+#scoreboard {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#reiniciarBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Estilo para centralizar a div 'instrucoes' com conteúdo */
+#instrucoes {
+    display: flex;                /* Usando flexbox para centralizar a div */
+    justify-content: center;      /* Centraliza a div horizontalmente */
+    align-items: center;          /* Centraliza a div verticalmente */
+    height: 100vh;                /* Garante que a div ocupe a altura da tela */
+    text-align: left;             /* Alinha o conteúdo interno à esquerda */
+    padding: 20px;                /* Adiciona um pouco de espaçamento ao redor do conteúdo */
+    box-sizing: border-box;       /* Garante que o padding não afete as dimensões da div */
+    background-color: #111;       /* Cor de fundo escuro (pode ser alterada conforme o tema) */
+    color: white;                 /* Cor do texto */
+    border-radius: 10px;          /* Bordas arredondadas */
+    max-width: 80%;               /* Limita a largura da div */
+    margin: 0 auto;               /* Centraliza a div na página */
+}
+
+/* Centralizando o título 'Instruções do Jogo' */
+#instrucoes h1 {
+    text-align: center;           /* Centraliza o texto do título */
+    width: 100%;                  /* Garantir que o título ocupe toda a largura disponível */
+    margin-bottom: 20px;          /* Espaço abaixo do título */
+}
+
+/* Para garantir que os parágrafos dentro da div fiquem alinhados à esquerda */
+#instrucoes p {
+    margin: 10px 0;               /* Adiciona espaço entre os parágrafos */
+    text-align: left;             /* Alinha o texto à esquerda */
+}
+
+/* Centralizando o botão 'Começar Jogo' */
+#startGameBtn {
+    position: absolute;           /* Tira o botão do fluxo normal de layout */
+    left: 50%;                    /* Posiciona o botão no meio horizontal */
+    top: 75%;                     /* Posiciona o botão no meio vertical */
+    transform: translate(-50%, -50%); /* Ajusta o botão para que ele fique exatamente no centro */
+    padding: 10px 20px;           /* Espaçamento interno do botão */
+    background-color: #2208b4;    /* Cor de fundo do botão */
+    color: white;                 /* Cor do texto do botão */
+    border: none;                 /* Sem borda */
+    border-radius: 5px;           /* Bordas arredondadas */
+    cursor: pointer;             /* Cursor de ponteiro ao passar sobre o botão */
+    font-size: 16px;              /* Tamanho do texto */
+    box-sizing: border-box;       /* Para garantir que o padding não afete o tamanho do botão */
+}
+
+#startGameBtn:hover {
+    background-color: #2208b4;   /* Cor do botão ao passar o mouse */
+}
+
+
